@@ -131,21 +131,55 @@ tab1, tab2, tab3, tab4 = st.tabs([
 if uploaded_file is not None or user_text_input is not None:
     with tab1:
         create_word_cloud(df['What Happened?'])
+
+        filename1 = 'output/my_word_cloud1.png'
+        plt.savefig(filename1)
+
+        with open(filename1, "rb") as img:
+            btn = st.download_button(
+                label="Download image",
+                data=img,
+                file_name=filename1,
+                mime="image/png"
+            )
     with tab2:
         create_word_cloud(df['Lessons Learned'])
+        
+        filename2 = 'output/my_word_cloud2.png'
+        plt.savefig(filename2)
+
+        with open(filename2, "rb") as img:
+            btn = st.download_button(
+                label="Download image",
+                data=img,
+                file_name=filename2,
+                mime="image/png"
+            )
     with tab3:
         create_word_cloud(df['Action Taken (at the time of the incident)'])
+
+        filename3 = 'output/my_word_cloud3.png'
+        plt.savefig(filename3)
+
+        with open(filename3, "rb") as img:
+            btn = st.download_button(
+                label="Download image",
+                data=img,
+                file_name=filename3,
+                mime="image/png"
+            )
     with tab4:
         create_word_cloud(df['Summary of Actions Taken (Investigation)'])
 
-filename = 'my_word_cloud.png'
-plt.savefig(filename)
+        filename4 = 'output/my_word_cloud4.png'
+        plt.savefig(filename4)
 
-with open(filename, "rb") as img:
-    btn = st.download_button(
-        label="Download image",
-        data=img,
-        file_name=filename,
-        mime="image/png"
-    )
+        with open(filename4, "rb") as img:
+            btn = st.download_button(
+                label="Download image",
+                data=img,
+                file_name=filename4,
+                mime="image/png"
+            )
+
 
