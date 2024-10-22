@@ -16,6 +16,9 @@ from PIL import Image
 st.title("WordClooud Generator")
 user_text_input = st.text_input("Insert text for wordcloud.")
 
+st.session_state.selected_divisions = None
+st.session_state.selected_specialties = None
+st.session_state.selected_category = None
 
 #upload document #change this section of the file
 #uploaded_file = 
@@ -50,19 +53,26 @@ if uploaded_image_mask is not None:
 #uploaded_image_mask = Image.open(uploaded_image_mask)
 #img_array = np.array(uploaded_image_mask)
 
-
-chosen_specialty = st.selectbox(
+if st.session_state.selected_divisions != None:
+    chosen_division = st.session_state.selected_divisions
+else: 
+    st.session_state.selected_divisions = st.selectbox(
     "Choose a Speciality",
     options=df['Speciality'].drop_duplicates().tolist())
 
-chosen_category = st.selectbox(
-    "Choose a Category",
-    options=df['Category'].drop_duplicates().tolist())
-
-chosen_divsion = st.selectbox(
+if st.session_state.selected_specialties != None:
+    chosen_specialities = st.session_state.selected_specialties
+else:
+    st.session_state.selected_specialties = st.selectbox(
     "Choose a Division",
     options=df['Division'].drop_duplicates().tolist())
 
+if st.session_state.selected_category != None:
+    chosen_category = st.session_state.selected_category
+else:
+    st.session_state.selected_category = st.selectbox(
+    "Choose a Category",
+    options=df['Category'].drop_duplicates().tolist())
 
 choose_colour = st.selectbox(
    "Choose a colour scheme",
@@ -132,7 +142,7 @@ if uploaded_file is not None or user_text_input is not None:
     with tab1:
         create_word_cloud(df['What Happened?'])
 
-        filename1 = 'output/my_word_cloud1.png'
+        filename1 = '../output/my_word_cloud1.png'
         plt.savefig(filename1)
 
         with open(filename1, "rb") as img:
@@ -145,7 +155,7 @@ if uploaded_file is not None or user_text_input is not None:
     with tab2:
         create_word_cloud(df['Lessons Learned'])
         
-        filename2 = 'output/my_word_cloud2.png'
+        filename2 = '../output/my_word_cloud2.png'
         plt.savefig(filename2)
 
         with open(filename2, "rb") as img:
@@ -158,7 +168,7 @@ if uploaded_file is not None or user_text_input is not None:
     with tab3:
         create_word_cloud(df['Action Taken (at the time of the incident)'])
 
-        filename3 = 'output/my_word_cloud3.png'
+        filename3 = '../output/my_word_cloud3.png'
         plt.savefig(filename3)
 
         with open(filename3, "rb") as img:
@@ -171,7 +181,7 @@ if uploaded_file is not None or user_text_input is not None:
     with tab4:
         create_word_cloud(df['Summary of Actions Taken (Investigation)'])
 
-        filename4 = 'output/my_word_cloud4.png'
+        filename4 = '../output/my_word_cloud4.png'
         plt.savefig(filename4)
 
         with open(filename4, "rb") as img:
