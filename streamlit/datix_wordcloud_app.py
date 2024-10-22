@@ -137,6 +137,7 @@ if uploaded_file is not None or user_text_input is not None:
         create_word_cloud(df['Action Taken (at the time of the incident)'])
     with tab4:
         create_word_cloud(df['Summary of Actions Taken (Investigation)'])
+
 filename = 'my_word_cloud.png'
 plt.savefig(filename)
 
